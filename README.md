@@ -5,12 +5,28 @@
 * установка производится через ansible/kubespray;
 * после применения следует настроить политику доступа к hello world извне.
 
+Результат установки через ansible/kubespray:
+
+```shell
+alexey@node1:~/12-kubernetes-05-cni$ sudo kubectl get node
+NAME          STATUS   ROLES                  AGE   VERSION
+node1.local   Ready    control-plane,master   19h   v1.21.3
+node2.local   Ready    control-plane,master   19h   v1.21.3
+node3.local   Ready    control-plane,master   19h   v1.21.3
+node4.local   Ready    <none>                 19h   v1.21.3
+node5.local   Ready    <none>                 19h   v1.21.3
+node6.local   Ready    <none>                 19h   v1.21.3
+```
 Поднимаем hello world:
 
 ```shell
 kubectl create deployment hello-world-depl --image=k8s.gcr.io/echoserver:1.4
 ```
+Применяем политику [networkpolicy.yaml](networkpolicy.yaml):
 
+```shell
+kubectl apply -f networkpolicy.yaml
+```
 
 
 ## Задание 2: изучить, что запущено по умолчанию
